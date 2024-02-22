@@ -1,34 +1,3 @@
-function tostr(sdf) {
-	hash = "[";
-	sdf.forEach( function(piece) {
-		switch (piece) {
-			case "white-king":
-				hash += "K";
-				break;
-			case "white-knight":
-				hash += "N";
-				break;
-			case "white-rook":
-				hash += "R";
-				break;
-			case "Empty":
-				hash += "_";
-				break;
-			case "black-rook":
-				hash += "r";
-				break;
-			case "black-knight":
-				hash += "n";
-				break;
-			case "black-king":
-				hash += "k";
-				break;
-		}
-	});
-	hash += "]"
-	return hash;
-}
-
 function anyRooks(pieceList){
 	let numPieces = 0;
 	for (let i = 0; i < pieceList.length; i++) {
