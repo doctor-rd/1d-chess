@@ -471,6 +471,7 @@ window.addEventListener('load', function(){
 
 	playAgainButton = $("#chess-replay");
 	claimDrawButton = $("#chess-draw");
+	blackStartButton = $("#chess-replay-black");
 	
 	let selectedTile, legalMoves, gameState;
 	let gameEnded = false;
@@ -494,6 +495,7 @@ window.addEventListener('load', function(){
 		drawBoard(ctx, gameState["pieceList"], selectedTile);
 
 		gameEnded = false;
+		blackStartButton.removeClass("invisible");
 		
 		claimDrawButton.addClass("invisible");
 	};
@@ -528,6 +530,7 @@ window.addEventListener('load', function(){
 				if (gameState["pieceList"][tileClicked] != "Empty"){
 					capturingMove = true;
 				}
+				blackStartButton.addClass("invisible");
 				makeMove(selectedTile, tileClicked, gameState["pieceList"]);
 				gameState["threefoldRep"] = recordPosition(gameState["pieceList"], gameState["positionsSeen"], gameState["threefoldRep"]);
 				selectedTile = -1;
@@ -575,6 +578,14 @@ window.addEventListener('load', function(){
 	playAgainButton.click( function() {
 		//reset game
 		initGame();
+	});
+	
+	blackStartButton.click( function() {
+		gameState["turn"] = "black";
+		blackStartButton.addClass("invisible");
+		setTimeout(function(){
+			gameEnded = makeAIMove(gameState);
+		}, 1000);
 	});
 	
 	claimDrawButton.click( function() {
